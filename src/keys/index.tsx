@@ -3,6 +3,7 @@ import keys_prod from "./keys_prod";
 
 interface ApiKeys {
   API_KEY?: string;
+  UNSPLASH?: string;
 }
 
 let keys: ApiKeys;
