@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import { string } from "prop-types";
 
-export default class SearchBar extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     value: string
-  //   };
-  // }
-  // inputHandler = e => {
-  //   this.setState({ value: e.target.value });
-  // };
+interface State {
+  inputValue: string;
+}
+
+export default class SearchBar extends Component<{}, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      inputValue: ""
+    };
+  }
 
   render() {
     return (
@@ -19,8 +19,8 @@ export default class SearchBar extends Component {
           <input
             placeholder="Give a five-day forcast in your favourite places"
             className="from-control"
-            // value={this.state.value}
-            // onChange={this.inputHandler}
+            value={this.state.inputValue}
+            onChange={e => this.onInputChange(e.target.value)}
             type="text"
           />
           <span className="input-group-btn">
@@ -32,4 +32,5 @@ export default class SearchBar extends Component {
       </div>
     );
   }
+  onInputChange = (inputValue: string) => this.setState({ inputValue });
 }
