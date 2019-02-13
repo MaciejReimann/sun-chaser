@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import SearchBar from "./containers/SearchBar";
+import keys from "./keys/index";
+
+interface Coords {
+  longitude: null | number;
+  latitude: null | number;
+}
 
 interface State {
-  position: Position;
+  coords: Coords;
+  // position: Position;
   positionError: {};
 }
 
@@ -10,17 +17,9 @@ export default class App extends Component<{}, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      position: {
-        coords: {
-          longitude: 0,
-          latitude: 0,
-          accuracy: 0,
-          altitude: 0,
-          altitudeAccuracy: 0,
-          heading: 0,
-          speed: 0
-        },
-        timestamp: 0
+      coords: {
+        longitude: null,
+        latitude: null
       },
       positionError: {}
     };
@@ -36,6 +35,7 @@ export default class App extends Component<{}, State> {
   }
 
   componentDidMount() {
+    console.log(keys);
     navigator.geolocation.getCurrentPosition(
       this.onSuccess,
       this.onError,
@@ -43,7 +43,7 @@ export default class App extends Component<{}, State> {
     );
   }
   onSuccess = (position: Position) => {
-    this.setState({ position });
+    this.setState({ coords: position.coords });
   };
   onError = (positionError: PositionError) => this.setState({ positionError });
 }
